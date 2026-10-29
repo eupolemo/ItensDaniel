@@ -1,0 +1,24 @@
+name: ${project.name}
+version: ${project.version}
+main: com.eupolemo.itensdaniel.ItensDanielPlugin
+api-version: '1.21'
+description: ${project.description}
+authors: [ Eupolemo ]
+website: https://github.com/eupolemo/ItensDaniel
+
+commands:
+  itens:
+    description: Lista e entrega os itens customizados
+    usage: /itens [menu|info <id>|dar <id> [jogador]|reload]
+    aliases: [ itensdaniel, itd ]
+
+permissions:
+  itens.use:
+    description: Usar /itens e os poderes dos itens
+    default: true
+  itens.dar:
+    description: Entregar itens customizados a jogadores
+    default: op
+  itens.reload:
+    description: Recarregar a configuracao do plugin
+    default: op
