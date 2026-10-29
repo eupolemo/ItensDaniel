@@ -236,9 +236,46 @@ corpo. Mudar isso exige o componente `equippable` com uma textura em
 
 ## Jogadores de Bedrock
 
-Nada muda: os poderes são todos server-side e os materiais usados existem nas duas edições. Se um
-jogador Bedrock não consegue `/itens dar`, quase sempre é permissão — o Floodgate prefixa o nome
-dele (padrão `.`):
+Os poderes são todos server-side e os materiais usados existem nas duas edições, então celular,
+tablet e console jogam normalmente via [Geyser](https://geysermc.org) + Floodgate.
+
+As **texturas**, não. O pack de `resourcepack/` é formato Java, e o Geyser não converte pack Java
+para Bedrock — sem mais nada, o item aparece com a textura do material base. O que resolve é o
+Geyser registrar um item Bedrock próprio para cada `item_model` nosso, e isso pede dois arquivos:
+
+```
+./empacotar-bedrock.sh
+```
+
+Sai `target/ItensDaniel-bedrock.mcpack` e `target/itensdaniel-geyser-mappings.json` — os dois
+também vêm anexados em cada [release](https://github.com/eupolemo/ItensDaniel/releases/latest).
+No servidor:
+
+```
+plugins/Geyser-Spigot/packs/ItensDaniel-bedrock.mcpack
+plugins/Geyser-Spigot/custom_mappings/itensdaniel-geyser-mappings.json
+```
+
+E em `plugins/Geyser-Spigot/config.yml`:
+
+```yaml
+enable-custom-content: true
+```
+
+Reinicie o servidor. O mapeamento casa pelo componente `item_model`, suportado pelo Geyser a
+partir do 1.21.4 — a mesma versão que o plugin tem como alvo.
+
+Os UUIDs do `manifest.json` são fixos no `empacotar-bedrock.sh` de propósito: trocar faz o cliente
+tratar como outro pack e baixar tudo de novo.
+
+**Limite:** isto troca o **ícone** do item. Armadura *vestida* continua com a aparência vanilla do
+material nas duas edições — é limite do Minecraft, não do Geyser.
+
+**Item novo seu** com textura própria não entra nos mappings sozinho: a tabela `ITENS` do
+`empacotar-bedrock.sh` lista os itens que já vêm configurados. Acrescente a linha dele lá.
+
+Se um jogador Bedrock não consegue `/itens dar`, quase sempre é permissão — o Floodgate prefixa o
+nome dele (padrão `.`):
 
 ```
 op .NomeDoJogador

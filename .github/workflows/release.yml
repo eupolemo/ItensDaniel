@@ -47,26 +47,43 @@ jobs:
       - name: Copia sem versao no nome (para a URL latest/download)
         run: cp "target/ItensDaniel-${VERSION}.jar" "target/ItensDaniel.jar"
 
-      - name: Empacotar o resourcepack
-        run: ./empacotar.sh
+      - name: Empacotar o resourcepack (Java) e o do Bedrock
+        run: |
+          ./empacotar.sh
+          ./empacotar-bedrock.sh
 
       - name: Montar as notas com o SHA-1 do pack
         run: |
           PACK_SHA1="$(sha1sum target/ItensDaniel-resourcepack.zip | cut -d' ' -f1)"
-          PACK_URL="https://github.com/${GITHUB_REPOSITORY}/releases/download/${GITHUB_REF_NAME}/ItensDaniel-resourcepack.zip"
+          BASE="https://github.com/${GITHUB_REPOSITORY}/releases/download/${GITHUB_REF_NAME}"
           {
             echo "## Instalacao"
             echo
             echo "1. Coloque \`ItensDaniel.jar\` em \`plugins/\` e reinicie o servidor."
-            echo "2. Para os jogadores verem as texturas, adicione ao \`server.properties\`:"
+            echo "2. Os itens ja vem com textura propria ligada (\`modelo:\` no \`config.yml\`),"
+            echo "   entao o resource pack passou a ser necessario. Adicione ao \`server.properties\`:"
             echo
             echo '```properties'
-            echo "resource-pack=${PACK_URL}"
+            echo "resource-pack=${BASE}/ItensDaniel-resourcepack.zip"
             echo "resource-pack-sha1=${PACK_SHA1}"
             echo "require-resource-pack=false"
             echo '```'
             echo
             echo "> O SHA-1 muda a cada release do pack. Sem ele atualizado, o cliente fica com a versao antiga em cache."
+            echo
+            echo "### Jogadores de Bedrock (celular, tablet, console)"
+            echo
+            echo "O pack acima e formato Java e nao serve para o Bedrock. Para quem entra via"
+            echo "Geyser, baixe os dois arquivos abaixo e coloque no servidor:"
+            echo
+            echo '```'
+            echo "plugins/Geyser-Spigot/packs/ItensDaniel-bedrock.mcpack"
+            echo "plugins/Geyser-Spigot/custom_mappings/itensdaniel-geyser-mappings.json"
+            echo '```'
+            echo
+            echo "E em \`plugins/Geyser-Spigot/config.yml\` deixe \`enable-custom-content: true\`."
+            echo "Sem esses tres passos os poderes funcionam, mas o item aparece com a textura"
+            echo "do material base."
           } > release-notes.md
           cat release-notes.md
 
@@ -78,6 +95,8 @@ jobs:
             "target/ItensDaniel-${VERSION}.jar"
             "target/ItensDaniel.jar"
             "target/ItensDaniel-resourcepack.zip"
+            "target/ItensDaniel-bedrock.mcpack"
+            "target/itensdaniel-geyser-mappings.json"
           )
           # Idempotente: se a tag ja tem release (por exemplo num re-run depois
           # de uma falha no Hangar), troca os assets em vez de abortar.

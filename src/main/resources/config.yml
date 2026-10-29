@@ -12,9 +12,11 @@ versao-config: 2
 #   brilho            brilho de encantamento sem encantar de verdade
 #   inquebravel       o item nao gasta durabilidade
 #   modelo            textura propria, vinda do resource pack em resourcepack/ (componente
-#                     item_model). Sem essa chave, o item usa a textura do material base.
-#                     Descomente so depois que os jogadores tiverem o pack, senao o item
-#                     aparece como textura faltando (o quadriculado roxo e preto).
+#                     item_model). Ja vem ligada: o pack sai publicado junto do release e o
+#                     servidor entrega aos jogadores pelo server.properties. Se o pack nao
+#                     estiver chegando, o item aparece como textura faltando (o quadriculado
+#                     roxo e preto) - nesse caso comente a chave. Jogador de Bedrock precisa
+#                     do .mcpack e dos mappings do Geyser; ver "Jogadores de Bedrock" no README.
 #   custom-model-data numero, para packs no formato antigo (anteriores a 1.21.4)
 #   cooldown-segundos espera entre usos dos poderes de clique direito
 #   multiferramenta   mina qualquer bloco rapido e com o drop certo, seja espada ou picareta
@@ -51,7 +53,7 @@ itens:
     nome: "Varinha da Tempestade"
     cor: "#7FD4FF"
     material: BLAZE_ROD
-    # modelo: itensdaniel:varinha-tempestade
+    modelo: itensdaniel:varinha-tempestade
     descricao:
       - "Clique com o botao direito para chamar um raio."
       - "Mire longe. Serio."
@@ -65,7 +67,7 @@ itens:
     nome: "Cajado do Vazio"
     cor: "#B388FF"
     material: ENDER_EYE
-    # modelo: itensdaniel:cajado-do-vazio
+    modelo: itensdaniel:cajado-do-vazio
     descricao:
       - "Clique com o botao direito para aparecer no bloco mirado."
     brilho: true
@@ -78,7 +80,7 @@ itens:
     nome: "Chama de Daniel"
     cor: "#FF7043"
     material: BLAZE_POWDER
-    # modelo: itensdaniel:chama-de-daniel
+    modelo: itensdaniel:chama-de-daniel
     descricao:
       - "Clique com o botao direito para lancar uma bola de fogo."
       - "Explode sem destruir o terreno."
@@ -95,7 +97,7 @@ itens:
     nome: "Coracao de Daniel"
     cor: "#FF5252"
     material: TOTEM_OF_UNDYING
-    # modelo: itensdaniel:coracao-de-daniel
+    modelo: itensdaniel:coracao-de-daniel
     descricao:
       - "Clique com o botao direito para curar tres coracoes."
     cooldown-segundos: 45
@@ -107,7 +109,7 @@ itens:
     nome: "Botas do Vento"
     cor: "#80DEEA"
     material: NETHERITE_BOOTS
-    # modelo: itensdaniel:botas-do-vento
+    modelo: itensdaniel:botas-do-vento
     descricao:
       - "Vestidas: voo livre e passo ligeiro."
     brilho: true
@@ -125,7 +127,7 @@ itens:
     nome: "Elmo do Corujao"
     cor: "#FFD54F"
     material: NETHERITE_HELMET
-    # modelo: itensdaniel:elmo-do-corujao
+    modelo: itensdaniel:elmo-do-corujao
     descricao:
       - "Vestido: enxerga no escuro e respira embaixo d'agua."
     brilho: true
@@ -144,7 +146,7 @@ itens:
     nome: "Espada Vampira"
     cor: "#E53935"
     material: NETHERITE_SWORD
-    # modelo: itensdaniel:espada-vampira
+    modelo: itensdaniel:espada-vampira
     descricao:
       - "Cada golpe rouba vida do inimigo e o deixa lento."
     brilho: true
@@ -160,7 +162,7 @@ itens:
     nome: "Peitoral Espinhoso"
     cor: "#8D6E63"
     material: NETHERITE_CHESTPLATE
-    # modelo: itensdaniel:peitoral-espinhoso
+    modelo: itensdaniel:peitoral-espinhoso
     descricao:
       - "Vestido: quem te bate sai voando."
     inquebravel: true
@@ -175,7 +177,7 @@ itens:
     nome: "Espada do Infinito"
     cor: "#FF4081"
     material: NETHERITE_SWORD
-    # modelo: itensdaniel:espada-do-infinito
+    modelo: itensdaniel:espada-do-infinito
     descricao:
       - "Espada, machado e picareta na mesma lamina."
       - "Botao esquerdo quebra ate bedrock."
@@ -224,7 +226,7 @@ itens:
     nome: "Picareta do Infinito"
     cor: "#40C4FF"
     material: NETHERITE_PICKAXE
-    # modelo: itensdaniel:picareta-do-infinito
+    modelo: itensdaniel:picareta-do-infinito
     descricao:
       - "Quebra 3x3 e ja entrega o minerio fundido."
       - "Acende o caminho, puxa os drops e deixa voar."
